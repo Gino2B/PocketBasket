@@ -104,8 +104,8 @@ ft_pct: 0.916
 ```
 
 The 4 moves for each player will be 
-Shoot uses fg3_pct and fg3m
-Pass uses assists
-steal uses stl
-box-out uses reb
-Health uses min
+- Shoot uses fg3_pct and fg3m
+- Pass uses assists
+- steal uses stl
+- box-out uses reb
+- Health uses min
