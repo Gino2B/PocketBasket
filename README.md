@@ -60,16 +60,16 @@ Using this to only retrieve pictures of players.
 | Component | Priority | Estimated Time | Time Invested | 
 | --- | :---: |  :---: | :---: | :---: |
 | Initial HTML setup | H | 2hrs|  |  
-| Axios set up | H | 7hrs|  |  
-| Render results | H | 6hrs| |  
-| Other JS | H | 6hrs|  |  
-| CSS for basic layout | M | 1hrs|  |  
-| CSS for results | M | 5hrs|  |  
-| Image placement | M | 2hrs|  |  
+| Axios set up | H | 3hrs|  |  
+| Render results | H | 3hrs| |  
+| Other JS | H | 3hrs|  |  
+| CSS for basic layout | M | 2hrs|  |  
+| CSS for results | M | 3hrs|  |  
+| Image placement | M | 3hrs|  |  
 | Media query | H | 3hrs|  |  
-| General Research | H | 6hrs|  |  
-| Debugging | H | 6hrs|  |  
-| Total | H | 44hrs|  |  
+| General Research | H | 3hrs|  |  
+| Debugging | H | 3hrs|  |  
+| Total | H | 28hrs|  |  
 
 ## example api call 
 This call will get the season averages stats of a player using their player ID and will be used to determine the damage and health of players.
