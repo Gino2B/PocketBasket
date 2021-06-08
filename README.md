@@ -2,7 +2,7 @@
 ## Project Name
 Poké-Ballin
 ## Project Description
-Allows users to pick a basketball player of their choice and battle against a randomly generated player choice in pokemon style!
+Allows users to pick a basketball player of their choice and battle against a randomly generated player choice in pokemon style! Determines the damage from the moves based off their stats from last season!
 ## API and Data Sample
 https://www.balldontlie.io/#introduction
 ``` JSON
