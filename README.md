@@ -26,9 +26,11 @@ data: [
   weight_pounds: 190
   }
 ],
+
+```
 https://nba-players.herokuapp.com/
 Using this to only retrieve pictures of players.
-```
+
 ## Wireframes
 [Wireframe](https://imgur.com/6Q1M6iK)
 ### MVP/PostMVP
