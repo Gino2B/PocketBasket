@@ -106,6 +106,6 @@ data: [
 The 4 moves for each player will be 
 - Shoot uses fg3_pct and fg3m
 - Pass uses assists
-- steal uses stl
+- steal uses stl and blocks
 - box-out uses reb
 - Health uses min
