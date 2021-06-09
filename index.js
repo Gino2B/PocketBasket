@@ -1,14 +1,25 @@
 const API = 'https://www.balldontlie.io/api/v1';
+const pictureAPI = 'https://nba-players.herokuapp.com/';
+const playerUI = document.querySelector('#player-user');
+const actionBox = document.querySelector('#action-box');
+const searchImage = document.querySelector('#search-image');
 const baseDamageShoot = 4;
 const baseDamagePass = 2;
 const baseDamageSteal = 3;
 const baseDamageRebound = 2;
 const button = document.querySelector('#get-player');
-//make a function that calls another function to check if the stats are good
+
+//clear the inner html if user selects a new player
+const clearUI = () =>  {
+  playerUI.innerHTML = '';
+  searchImage.innerHTML = '';
+  actionBox.style.visibility ="hidden";
+  playerUI.style.visibility ="hidden";
+}; 
 
 //Uses playerID to get season averages and data
 const seasonAverages = async (playerID) => {
-  try{
+  try{   
     const response = await axios.get(`${API}/season_averages?season=2020&player_ids[]=${playerID}`);
     const responseData = response.data.data[0];
     console.log(responseData);
@@ -17,12 +28,11 @@ const seasonAverages = async (playerID) => {
     const threePointMade = responseData.fg3m;
     console.log(threePointMade);
     const minutes = responseData.min;
-    let health= parseInt(minutes);    
+    let health = parseInt(minutes);    
 
     const move1 = document.querySelector('#move-1');
     const currentHealth = document.createElement('p');
-    const playerHealth = document.querySelector('#player-user');
-    playerHealth.appendChild(currentHealth);
+    playerUI.appendChild(currentHealth);
     currentHealth.innerText = health; 
 
     //what happens if user clicks on move 1 "shoot"
@@ -32,14 +42,12 @@ const seasonAverages = async (playerID) => {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }else {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }
     });
 
@@ -53,14 +61,12 @@ const seasonAverages = async (playerID) => {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }else {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen       
+        playerUI.appendChild(currentHealth);//appends health to the screen       
       }
     });
 
@@ -73,14 +79,12 @@ const seasonAverages = async (playerID) => {
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }else{
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }
     });
 
@@ -92,42 +96,69 @@ const seasonAverages = async (playerID) => {
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }else{
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
         health -= damage; //updates the user health
         currentHealth.innerText = health; //sets the users health for screen use
-        const playerHealth = document.querySelector('#player-user'); //gets the place to place the user health
-        playerHealth.appendChild(currentHealth);//appends health to the screen
+        playerUI.appendChild(currentHealth);//appends health to the screen
       }
     });
-
-
   }
   catch(error) {
     console.error(error.message);
   }
 };
 
+
 //searches for player by full name and gets their Full name back and their player ID
 const searchPlayer = async (playerName) => {
-  try{
+    try{
+    clearUI(); 
     const response = await axios.get(`${API}/players?search=${playerName}`);
     const responseData = response.data.data[0];
     const firstName = responseData.first_name;
     const lastName = responseData.last_name;
     const fullName = `${firstName} ${lastName}`;
-    const playerID = responseData.id;
+    const pictureResponse = await axios.get(`${pictureAPI}players/${lastName}/${firstName}`);
+
+    //set up the select image functionality
+    const searchImg = document.createElement('img');
+    searchImg.src = pictureResponse.config.url;
+    const selectText = document.createElement('p');
+    selectText.innerText = "Click on the image to select this player";
+    searchImage.appendChild(searchImg);
+    searchImage.appendChild(selectText);
+    searchImg.addEventListener('click',()=>{
+      actionBox.style.visibility ="visible";
+      playerUI.style.visibility ="visible";
+    });
+
+    //update the player UI box
+    const displayName = document.createElement('p');
+    displayName.innerText = fullName;
     const position = responseData.position;
-    console.log(fullName);
+    const displayPosition = document.createElement('p');
+    displayPosition.innerText = position;
+
+    //loads the player UI box onto the page
+    const img = document.createElement('img');
+    img.src = pictureResponse.config.url;
+    playerUI.append(img,displayName,displayPosition);
+    
+    const playerID = responseData.id;
     seasonAverages(playerID);
-    console.log(position);
   } catch (error) {
     console.error(error.message);
   }
 };
-searchPlayer('Stephen Curry');
 
+const playerForm = document.querySelector('form')
+const playerSearch = document.querySelector('#player-search')
+playerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  await searchPlayer(playerSearch.value);
+  playerSearch.value='';   
+})
 
 
