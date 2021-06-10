@@ -26,52 +26,8 @@ data: [
     weight_pounds: 190
   }
 ]
-
 ```
-https://nba-players.herokuapp.com/
-Using this to only retrieve pictures of players.
 
-## Wireframes
-[Wireframe](https://imgur.com/bS4AJk5)
-### MVP/PostMVP
-#### MVP
-- Axios call on the balldontlie API
-- Get data and use the data to determine damage of moves
-- Include photos of the players
-- Display name,hp,and position
-- Show damage done player and then computer
-#### PostMVP 
-- Make a pokemon battle style field that incorporates basketball'
-- Make a logo
-- Instead of decrementing number values for hp, make an hp bar
-## Project Schedule
-|  Day | Deliverable | Status
-|---|---| ---|
-|June 6-7| Prompt / Wireframes / Priority Matrix / Timeframes | Complete
-|June 7| Project Approval | Complete
-|June 8| Core Application Structure (HTML, CSS, etc.) | Incomplete
-|June 10| Initial Clickable Model  | Incomplete
-|June 11| MVP | Incomplete
-|June 14| Presentations/Project Submission | Incomplete
-## Priority Matrix
-[Priority matrix] https://imgur.com/hysHqTc
-
-## Timeframes
-| Component | Priority | Estimated Time | Time Invested |   
-| --- | :---: |  :---: | :---: | :---: |  
-| Initial HTML setup | H | 2hrs|  |  
-| Axios set up | H | 3hrs|  |  
-| Render results | H | 3hrs| |  
-| Other JS | H | 3hrs|  |  
-| CSS for basic layout | M | 2hrs|  |  
-| CSS for results | M | 3hrs|  |  
-| Image placement | M | 3hrs| |  
-| Media query | H | 3hrs|  |  
-| General Research | H | 3hrs|  |  
-| Debugging | H | 3hrs|  |  
-| Total | H | 28hrs|  |  
-
-## example api call 
 This call will get the season averages stats of a player using their player ID and will be used to determine the damage and health of players.
 https://www.balldontlie.io/api/v1/season_averages?season=2020&player_ids[]=115
 ```
@@ -109,3 +65,48 @@ The 4 moves for each player will be
 - steal uses stl and blocks
 - box-out uses reb
 - Health uses min
+
+https://nba-players.herokuapp.com/
+Using this to only retrieve pictures of players.
+
+## Wireframes
+[Wireframe](https://imgur.com/bS4AJk5)
+### MVP/PostMVP
+#### MVP
+- Axios call on the balldontlie API
+- Get data and use the data to determine damage of moves
+- Include photos of the players
+- Display name,hp,and position
+- Determine who wins or loses
+#### PostMVP 
+- Show damage done player and then computer
+- Make a pokemon battle style field that incorporates basketball'
+- Make a logo
+- Instead of decrementing number values for hp, make an hp bar
+## Project Schedule
+|  Day | Deliverable | Status
+|---|---| ---|
+|June 6-7| Prompt / Wireframes / Priority Matrix / Timeframes | Complete
+|June 7| Project Approval | Complete
+|June 8| Core Application Structure (HTML, CSS, etc.) | complete
+|June 10| Initial Clickable Model  | complete
+|June 11| MVP | Incomplete
+|June 14| Presentations/Project Submission | Incomplete
+## Priority Matrix
+[Priority matrix] https://imgur.com/hysHqTc
+
+## Timeframes
+| Component | Priority | Estimated Time | Time Invested |   
+| --- | :---: |  :---: | :---: | :---: |  
+| Initial HTML setup | H | 2hrs|  |  
+| Axios set up | H | 3hrs|  |  
+| Render results | H | 3hrs| |  
+| Other JS | H | 3hrs|  |  
+| CSS for basic layout | M | 2hrs|  |  
+| CSS for results | M | 3hrs|  |  
+| Image placement | M | 3hrs| |  
+| Media query | H | 3hrs|  |  
+| General Research | H | 3hrs|  |  
+| Debugging | H | 3hrs|  |  
+| Total | H | 28hrs|  |  
+
