@@ -11,6 +11,8 @@ const playerUIContainer = document.querySelector('#playerUI-container');
 const computerUIContainer = document.querySelector('#computerUI-container');
 const playerImageContainer = document.querySelector('#playerImage-container');
 const computerImageContainer = document.querySelector('#computerImage-container');
+const computerHPText = document.createElement('p');
+const userHPText = document.createElement('p');
 
 const baseDamageShoot = 3;
 const baseDamagePass = 2;
@@ -27,13 +29,18 @@ const clearUI = () =>  {
   playerImageContainer.innerHTML = '';
   computerImageContainer.innerHTML = '';
 
+
   //setting up hp values
+  userHPText.id = "playerHP-text";
+  userHPText.innerText = "HP:";
+  computerHPText.id = "computerHP-text";
+  computerHPText.innerText = "HP:";
   playerHP.innerText = 33;
   playerHP.id = 'playerHP';
-  playerUIContainer.appendChild(playerHP);
+  playerUIContainer.append(userHPText,playerHP);
   computerHP.innerText = 33;
   computerHP.id = 'computerHP';
-  computerUIContainer.appendChild(computerHP);
+  computerUIContainer.append(computerHPText,computerHP);
   //setting up hp values
 
   actionBox.style.visibility ="hidden";
@@ -156,6 +163,7 @@ const searchPlayer = async (playerName) => {
     const position = responseData.position;
     const displayPosition = document.createElement('p');
     displayPosition.innerText = position;
+
 
     //loads the player UI box onto the page
     const img = document.createElement('img');
