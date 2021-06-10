@@ -160,7 +160,108 @@ main {
   border: 5px solid black;
   border-radius: 6px;
 }
+@media only screen and (min-width: 2560px) {
+  #logo{
+    font-size: 40px;
+  }
+  #search-image img{
+    width: 450px;
+  }
+  #search-image p {
+    font-size: 24px;
+  }
+  input[type="text"]{
+    font-size: 24px;
+  }
+  #player-search {
+    padding: 25px;
+    width: 25rem;
+  }
+  #get-player[type="submit"]{
+    font-size: 24px;
+  }
+  #get-player{
+    width: 10rem;
+    height: 5rem;
+  }
+  #playerImage-container img{
+    margin-left: 38px;
+    width: 200px;
+  }
+  #playerUI-container{
+    width: 24rem;
+    height: 12rem;
+  }
+  #playerUI-container p {
+    font-size: 28px;
+  }
+  #playerImage-container img{
+  width: 350px;
+  }
+  #computerUI-container{
+    width: 24rem;
+    height: 12rem;
+  }
+  #computerUI-container p {
+    font-size: 28px;
+  }
+  #computerImage-container img{
+  width: 350px;
+  }
+  #move-1{
+    padding: 2em 12em;
+    font-size: 22px;
+  }
+  #move-2{
+    padding: 2em 12em;
+    font-size: 22px;
+  }
+  #move-3{
+    padding: 2em 12em;
+    font-size: 22px;
+  }
+  #move-4{
+    padding: 2em 12em;
+    font-size: 22px;
+  }
+}
 
+@media only screen and (max-width: 1024px) {
+  body{
+    position: absolute;
+  }
+  header{
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1r;
+    grid-template-rows: repeat(4,1fr);
+    width: 100vw;
+  }
+  #playerImage-container img{
+    margin-left: 38px;
+    width: 200px;    
+  }
+  #computer-user{
+    margin-right: 38px;
+  }
+  #computerImage-container img{
+    width: 200px;
+  }
+  #move-1{
+    padding: 2em 5em;
+  }
+  #move-2{
+    padding: 2em 5em;
+  }
+  #move-3{
+    padding: 2em 5em;
+  }
+  #move-4{
+    padding: 2em 5em;
+  }
+}
 
 @media only screen and (max-width: 768px) {
   body{
@@ -173,9 +274,14 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1r;
     grid-template-rows: repeat(4,1fr);
+    width: 100vw;
   }
   #playerImage-container img{
-    width: 200px;
+    margin-left: 38px;
+    width: 200px;    
+  }
+  #computer-user{
+    grid-column: 2 /span 5;
   }
   #computerImage-container img{
     width: 200px;
