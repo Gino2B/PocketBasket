@@ -13,6 +13,7 @@ const playerImageContainer = document.querySelector('#playerImage-container');
 const computerImageContainer = document.querySelector('#computerImage-container');
 const computerHPText = document.createElement('p');
 const userHPText = document.createElement('p');
+const actionPrompt = document.querySelector('#action-prompt');
 
 const baseDamageShoot = 3;
 const baseDamagePass = 2;
@@ -49,13 +50,15 @@ const clearUI = () =>  {
 }; 
 
 //Uses playerID to get season averages and data
-const seasonAverages = async (playerID) => {
+const seasonAverages = async (playerID, playerName) => {
   try{  
     const response = await axios.get(`${API}/season_averages?season=2020&player_ids[]=${playerID}`);
     const responseData = response.data.data[0];
     const threePointPerc = responseData.fg3_pct;
     const threePointMade = responseData.fg3m;
     const move1 = document.querySelector('#move-1');
+
+    actionPrompt.innerText = `What will ${playerName} do?`;
 
     const computerHP = await document.querySelector('#computerHP');
     let computerHPvalue = computerHP.textContent;
@@ -172,7 +175,7 @@ const searchPlayer = async (playerName) => {
     playerUIContainer.append(displayName,displayPosition);
     
     const playerID = responseData.id;
-    seasonAverages(playerID);
+    seasonAverages(playerID, fullName);
  
 
   } catch (error) {

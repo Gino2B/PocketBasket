@@ -9,18 +9,80 @@ header{
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: repeat(5,1fr);
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   background-color: lightcyan;
 }
+#outer-container {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/*************************** CITATION ***************************/
+/********* https://codepen.io/blakeworsley/pen/pbdqBK ***********/
+/* FROM HERE TO NEXT COMMENT IS CSS FROM AN CODEPEN FOR A LOGO */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+.ball {
+  height: 100px;
+  width: 100px;  
+  border-radius: 100px;
+  display: flex;
+  border: 5px black solid;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(#7D1827 5%, red 49%, black 5%, white 49%, #CADBD1)
+}
+
+.center, .center2 {
+  background: white;
+  border: 3px black solid;
+}
+.center {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: grey;
+}
+.center2 {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background-image: radial-gradient(white 60%, #757F7A)
+}
+
+.ball:hover{
+  transition-duration: .2s;
+  transform: rotate(5deg);
+/*   transform: rotate(0deg); */
+}
+/* FROM HERE TO PREVIOUS LAST COMMENT IS CSS FROM AN CODEPEN FOR A LOGO */
+/********* https://codepen.io/blakeworsley/pen/pbdqBK ***********/
+/*************************** CITATION ***************************/
+
 #logo {
   grid-column: 2;
   grid-row: 2;
   margin: auto;
+  padding:  50px 100px;
+  border: 4px solid black;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #ef3b36, #ffffff);
 }
 #search-image{
   grid-column: 2;
   grid-row: 3;
   margin: auto;
+}
+#search-image img{
+  margin: 0 auto;
 }
 #search-image p {
   text-align: center;
@@ -41,7 +103,7 @@ main {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4,1fr);
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
 }
 
 #player-user {
@@ -105,13 +167,17 @@ main {
   border-radius: 100%;
 }
 #action-box{
+  margin: 10px;
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-template-rows: 1fr 3fr 3fr;
   grid-column: 2 / 5;
   grid-row: 4;
   visibility: hidden;
+  height: 40vh;
   text-align: center;
+  border: 3px solid black;
+  background: linear-gradient(to bottom, #e0eafc, #cfdef3);
 }
 #action-text{
   grid-column: 1 /span 2;
@@ -162,10 +228,10 @@ main {
 }
 @media only screen and (min-width: 2560px) {
   #logo{
-    font-size: 40px;
+    font-size: 30px;
   }
   #search-image img{
-    width: 450px;
+    width: 400px;
   }
   #search-image p {
     font-size: 24px;
@@ -226,7 +292,7 @@ main {
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
   body{
     position: absolute;
   }
@@ -263,7 +329,7 @@ main {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 426px) and (max-width: 768px) {
   body{
     position: absolute;
   }
@@ -287,25 +353,36 @@ main {
     width: 200px;
   }
   #move-1{
-    padding: 2em 6em;
+    padding: 2em 5em;
+    margin-left: 5px;
   }
   #move-2{
-    padding: 2em 6em;
+    padding: 2em 5em;
+    margin-right: 5px;
   }
   #move-3{
-    padding: 2em 6em;
+    padding: 2em 5em;
+    margin-left: 5px;
   }
   #move-4{
-    padding: 2em 6em;
+    padding: 2em 5em;
+    margin-right: 5px;
   }
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (min-width: 376px) and (max-width: 425px) {
   body{
     position: absolute;
   }
   header{
     grid-template-columns: 1fr 2fr 1fr;
+  }
+  #logo{
+    font-size: 12px;
+    padding: 25px 50px;
+  }
+  #search-image img{
+    width: 200px;
   }
   #player-form{
     width: 15rem;
@@ -358,7 +435,63 @@ main {
   }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+  body{
+    position: absolute;
+  }
+  #logo{
+    font-size: 10px;
+    padding: 25px 50px;
+  }
+  #search-image img{
+    width: 200px;
+  }
+  #player-search {
+    width: 8rem;
+  }
+  #playerUI-container{
+    width: 9rem;
+    height: 6rem;
+  }
+  #playerUI-container p {
+    font-size: 12px;
+    margin: .5rem .5rem;
+  }
+  #playerImage-container img{
+    width: 120px;
+    height: 105px;
+  }
+
+  #computer-user{
+    grid-column: 2 /span 5;
+  }
+  #computerUI-container{
+    width: 9rem;
+    height: 6rem;
+  }
+  #computerUI-container p {
+    font-size: 12px;
+    margin: .5rem .5rem;
+  }
+  #computerImage-container img{
+    width: 120px;
+    height: 105px;
+  }
+  #move-1{
+    padding: 1rem 1rem;
+  }
+  #move-2{
+    padding: 1rem 1rem;
+  }
+  #move-3{
+    padding: 1rem 1rem;
+  }
+  #move-4{
+    padding: 1rem 1rem;
+  }
+}
+
+@media only screen and (min-width: 200px) and (max-width: 320px) {
   body{
     position: absolute;
   }
@@ -382,15 +515,19 @@ main {
     height: 105px;
   }
   #move-1{
-    padding: 1rem 1rem;
+    padding: 1rem .5rem;
+    margin-left: 5px;
   }
   #move-2{
-    padding: 1rem 1rem;
+    padding: 1rem .5rem;
+    margin-right: 5px;
   }
   #move-3{
-    padding: 1rem 1rem;
+    padding: 1rem .5rem;
+    margin-left: 5px;
   }
   #move-4{
-    padding: 1rem 1rem;
+    padding: 1rem .5rem;
+    margin-right: 5px;
   }
 }
