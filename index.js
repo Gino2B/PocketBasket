@@ -24,6 +24,8 @@ const clearUI = () =>  {
   searchImageDiv.innerHTML = '';
   actionLog.innerHTML ='';
   computerUIContainer.innerHTML = '';
+  playerImageContainer.innerHTML = '';
+  computerImageContainer.innerHTML = '';
 
   //setting up hp values
   playerHP.innerText = 33;
