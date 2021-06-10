@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 header{
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
@@ -15,26 +18,41 @@ header{
   grid-row: 3;
   margin: auto;
 }
+#play-game{
+  scroll-behavior: smooth;
+}
 #search-bar{
   grid-column: 2;
   grid-row: 4;
   margin: auto;
 }
-#player-search {
-  width: 300px;
-}
 main {
   display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4,1fr);
+  grid-template-areas:  "A B C D E"
+                        "F G H I J"
+                        "K L M N O"
+                        "P Q R S T";
+  width: 100vw;
+  height: 100vh;
 }
 #action-box{
+  grid-column: 2 / 5;
+  grid-row: 4;
   visibility: hidden;
+  text-align: center;
 }
 #player-user {
   visibility: hidden;
 }
-/* #player-user p{
+#playerImage-container{
+  grid-column: 1;
+  grid-row: 3;
+}
+#computer-user {
   visibility: hidden;
-} */
+}
 #select-text {
   visibility: hidden;
 }

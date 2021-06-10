@@ -5,8 +5,14 @@ const actionBox = document.querySelector('#action-box');
 const searchImageDiv = document.querySelector('#search-image');
 const actionLog = document.querySelector('#moveused-text');
 const computerUI = document.querySelector('#computer-user');
+const playerHP = document.createElement('p');
+const computerHP = document.createElement('p');
+const playerUIContainer = document.querySelector('#playerUI-container');
+const computerUIContainer = document.querySelector('#computerUI-container');
+const playerImageContainer = document.querySelector('#playerImage-container');
+const computerImageContainer = document.querySelector('#computerImage-container');
 
-const baseDamageShoot = 4;
+const baseDamageShoot = 3;
 const baseDamagePass = 2;
 const baseDamageSteal = 3;
 const baseDamageRebound = 2;
@@ -14,11 +20,23 @@ const button = document.querySelector('#get-player');
 
 //clear the inner html of all UI if user selects a new player
 const clearUI = () =>  {
-  playerUI.innerHTML = '';
+  playerUIContainer.innerHTML = '';
   searchImageDiv.innerHTML = '';
   actionLog.innerHTML ='';
+  computerUIContainer.innerHTML = '';
+
+  //setting up hp values
+  playerHP.innerText = 33;
+  playerHP.id = 'playerHP';
+  playerUIContainer.appendChild(playerHP);
+  computerHP.innerText = 33;
+  computerHP.id = 'computerHP';
+  computerUIContainer.appendChild(computerHP);
+  //setting up hp values
+
   actionBox.style.visibility ="hidden";
   playerUI.style.visibility ="hidden";
+  computerUI.style.visibility = "hidden";
 }; 
 
 //Uses playerID to get season averages and data
@@ -26,31 +44,24 @@ const seasonAverages = async (playerID) => {
   try{  
     const response = await axios.get(`${API}/season_averages?season=2020&player_ids[]=${playerID}`);
     const responseData = response.data.data[0];
-    console.log(responseData);
     const threePointPerc = responseData.fg3_pct;
-    console.log(threePointPerc);
     const threePointMade = responseData.fg3m;
-    console.log(threePointMade);
-    const minutes = responseData.min;
-    let health = parseInt(minutes);    
-
-
     const move1 = document.querySelector('#move-1');
-    const currentHealth = document.createElement('p');
-    playerUI.appendChild(currentHealth);
-    currentHealth.innerText = `HP: ${health}`;
+
+    const computerHP = await document.querySelector('#computerHP');
+    let computerHPvalue = computerHP.textContent;
 
     //what happens if user clicks on move 1 "shoot"
     move1.addEventListener('click', () => {
       //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
       if(threePointPerc >= .42) {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }else {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }
     });
 
@@ -62,12 +73,12 @@ const seasonAverages = async (playerID) => {
       //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
       if(steals >= 2 || blocks >= 2) {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }else {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use      
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use  
       }
     });
 
@@ -78,12 +89,12 @@ const seasonAverages = async (playerID) => {
       if(assists >= 7){
         //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }else{
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }
     });
 
@@ -91,14 +102,14 @@ const seasonAverages = async (playerID) => {
     const move4 = document.querySelector('#move-4');
     const rebounds = responseData.reb;
     move4.addEventListener('click', () => {
-      if(rebounds >= 9){
+      if(rebounds >= 7){
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }else{
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
-        health -= damage; //updates the user health
-        currentHealth.innerText = `HP: ${health}`; //sets the users health for screen use
+        computerHPvalue -= damage; //updates the user health
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
       }
     });
   }
@@ -132,8 +143,9 @@ const searchPlayer = async (playerName) => {
     searchImageDiv.appendChild(searchImageATag);
     searchImageDiv.appendChild(selectText);
     searchImgPicture.addEventListener('click',()=>{
-      actionBox.style.visibility ="visible";
-      playerUI.style.visibility ="visible";
+      actionBox.style.visibility = "visible";
+      playerUI.style.visibility = "visible";
+      computerUI.style.visibility = "visible";
     });
 
     //get data for the player UI box
@@ -146,7 +158,8 @@ const searchPlayer = async (playerName) => {
     //loads the player UI box onto the page
     const img = document.createElement('img');
     img.src = pictureResponse.config.url;
-    playerUI.append(img,displayName,displayPosition);
+    playerImageContainer.appendChild(img);
+    playerUIContainer.append(displayName,displayPosition);
     
     const playerID = responseData.id;
     seasonAverages(playerID);
@@ -164,13 +177,91 @@ const computerSeasonAverages = async (playerID) => {
   try{  
     const response = await axios.get(`${API}/season_averages?season=2020&player_ids[]=${playerID}`);
     const responseData = response.data.data[0];
-    console.log(responseData);
     const threePointPerc = responseData.fg3_pct;
-    console.log(threePointPerc);
     const threePointMade = responseData.fg3m;
-    console.log(threePointMade);
-    const minutes = responseData.min;
-    let health = parseInt(minutes);  
+    const playerHP = await document.querySelector('#playerHP');
+    let playerHPvalue = playerHP.textContent;
+
+    const move1 = document.querySelector('#move-1');
+    const move2 = document.querySelector('#move-2');
+    const steals = responseData.stl;
+    const blocks = responseData.blk;
+    const move3 = document.querySelector('#move-3');
+    const assists = responseData.ast;
+    const move4 = document.querySelector('#move-4');
+    const rebounds = responseData.reb;
+
+    const useMove = (num) => {
+      if(num === 0) {
+        if(threePointPerc >= .42) {
+          //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
+          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Shoot");
+        }else {
+          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Shoot");
+        }
+      }else if(num === 2){
+        if(steals >= 2 || blocks >= 2) {
+          //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
+          const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Defend");
+        }else {
+          const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Defend");
+        }
+      }else if(num === 3){    //what happens if user clicks on move 3 "pass"
+        if(assists >= 7){
+          //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
+          const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Pass");
+        }else{
+          const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Pass");
+        }        
+      }else{    //what happens if user clicks on move 4 "box-out"
+        if(rebounds >= 7){
+          const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Box-out");
+        }else{
+          const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
+          playerHPvalue -= damage; //updates the user health
+          playerHP.innerText = playerHPvalue;//sets the users health for screen use
+          console.log("Used Box-out");
+        }        
+      }
+    };
+    
+    move1.addEventListener('click', () => {
+      useMove(Math.floor(Math.random() * 4));
+    } ); 
+
+    move2.addEventListener('click', () => {
+      useMove(Math.floor(Math.random() * 4));
+    } ); 
+
+    move3.addEventListener('click', () => {
+      useMove(Math.floor(Math.random() * 4));
+    } ); 
+
+    move4.addEventListener('click', () => {
+      useMove(Math.floor(Math.random() * 4));
+    } ); 
+
   }catch(error){
     console.error(error.message);
   } 
@@ -178,8 +269,9 @@ const computerSeasonAverages = async (playerID) => {
 
 
 
-//hardcoding options for computer to select from
-const playerNames = ["Lebron James", "Kevin Durant", "James Harden", "Anthony Davis", "Giannis Antetokounmpo" ]
+//hardcoding options for computer to select from the top 20 players (IMO)
+const playerNames = ["Lebron James", "Kevin Durant", "James Harden", "Anthony Davis", "Giannis Antetokounmpo","Stephen Curry", "Kawhi Leonard", "Jimmy Butler", "Joel Embiid","Nikola Jokic", "Damian Lillard", "Bradley Beal", "Jayson Tatum", "Russell Westbrook", "Kyrie Irving", "Paul George", "Chris Paul", "Devin Booker", "Donovan Mitchell", "Karl-Anthony Towns" ]
+
 
 const computerPlayer = async (computerName) => {
   try{
@@ -200,7 +292,8 @@ const computerPlayer = async (computerName) => {
     //loads the player UI box onto the page
     const img = document.createElement('img');
     img.src = pictureResponse.config.url;
-    computerUI.append(img,displayName,displayPosition);
+    computerImageContainer.appendChild(img);
+    computerUIContainer.append(displayName,displayPosition);
     
     const playerID = responseData.id;
     computerSeasonAverages(playerID);
@@ -214,6 +307,7 @@ const computerPlayer = async (computerName) => {
 
 const playerForm = document.querySelector('form')
 const playerSearch = document.querySelector('#player-search')
+
 
 playerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
