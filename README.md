@@ -65,7 +65,7 @@ Using this to only retrieve pictures of players.
 | Other JS | H | 3hrs|  |  
 | CSS for basic layout | M | 2hrs|  |  
 | CSS for results | M | 3hrs|  |  
-| Image placement | M | 3hrs|  |  
+| Image placement | M | 3hrs| |  
 | Media query | H | 3hrs|  |  
 | General Research | H | 3hrs|  |  
 | Debugging | H | 3hrs|  |  
