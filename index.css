@@ -12,11 +12,82 @@ header{
   height: 95vh;
   background-color: lightcyan;
 }
-#outer-container {
+
+#logo {
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 2;
+  margin: auto;
+  padding:  50px 100px;
+  border: 4px solid black;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #ef3b36, #ffffff);
+}
+#search-image{
+  grid-column: 2;
+  grid-row: 3;
+  margin: auto;
+}
+#search-image img{
+  margin: 0 auto;
+}
+#search-image p {
+  text-align: center;
+}
+#search-bar{
+  grid-column: 2;
+  grid-row: 4;
+  margin: auto;
+}
+#select-text {
+  visibility: hidden;
+}
+hr{
+  margin: 20px;
+}
+main {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4,1fr);
+  width: 100vw;
+  height: 90vh;
 }
 
+#player-user {
+  margin: auto;
+  display: flex;
+  flex-direction: row-reverse;
+  visibility: hidden;
+  grid-column: 1/4;
+  grid-row: 3;
+}
+#playerUI-container{
+  margin: auto;
+  margin-left: 10px;
+  width: 20rem;
+  height: 9rem;
+  border: 2px solid grey;
+}
+#playerUI-container p {
+  margin: 1rem 1rem;
+  font-size: 20px;
+}
+#playerHP-text {
+  display: inline;
+}
+#playerHP{
+  display: inline-block;
+  margin: 0;
+}
+#playerImage-container img{
+  border: 2px solid black;
+  border-radius: 100%;
+}
+
+#outer-container {
+  grid-column: 2;
+  grid-row: 2;
+  margin: auto;
+}
 /*************************** CITATION ***************************/
 /********* https://codepen.io/blakeworsley/pen/pbdqBK ***********/
 /* FROM HERE TO NEXT COMMENT IS CSS FROM AN CODEPEN FOR A LOGO */
@@ -24,7 +95,7 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 10vh;
 }
 
 .ball {
@@ -66,81 +137,13 @@ header{
 /* FROM HERE TO PREVIOUS LAST COMMENT IS CSS FROM AN CODEPEN FOR A LOGO */
 /********* https://codepen.io/blakeworsley/pen/pbdqBK ***********/
 /*************************** CITATION ***************************/
-
-#logo {
-  grid-column: 2;
-  grid-row: 2;
-  margin: auto;
-  padding:  50px 100px;
-  border: 4px solid black;
-  border-radius: 50%;
-  background: linear-gradient(to bottom, #ef3b36, #ffffff);
-}
-#search-image{
-  grid-column: 2;
-  grid-row: 3;
-  margin: auto;
-}
-#search-image img{
-  margin: 0 auto;
-}
-#search-image p {
-  text-align: center;
-}
-#search-bar{
-  grid-column: 2;
-  grid-row: 4;
-  margin: auto;
-}
-#select-text {
-  visibility: hidden;
-}
-hr{
-  margin: 20px;
-}
-main {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4,1fr);
-  width: 100vw;
-  height: 95vh;
-}
-
-#player-user {
-  margin: auto;
-  display: flex;
-  flex-direction: row-reverse;
-  visibility: hidden;
-  grid-column: 1/4;
-  grid-row: 3;
-}
-#playerUI-container{
-  margin: auto;
-  margin-left: 10px;
-  width: 20rem;
-  height: 9rem;
-  border: 2px solid grey;
-}
-#playerUI-container p {
-  margin: 1rem 1rem;
-  font-size: 20px;
-}
-#playerHP-text {
-  display: inline;
-}
-#playerHP{
-  display: inline-block;
-  margin: 0;
-}
-#playerImage-container img{
-  border: 2px solid black;
-  border-radius: 100%;
-}
 #moveused-text{
   grid-column: 2 / 5;
   grid-row: 2;
   text-align: center;
+  margin: auto;
 }
+
 #computerHP-text{
   display:inline;
 }
@@ -300,6 +303,7 @@ main {
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   body{
     position: absolute;
+    font-size: 16px;
   }
   header{
     grid-template-columns: 1fr 2fr 1fr;
@@ -313,6 +317,9 @@ main {
   #playerImage-container img{
     margin-left: 38px;
     width: 200px;    
+  }
+  #outer-container{
+    grid-column: 1;
   }
   #computer-user{
     margin-right: 38px;
@@ -341,36 +348,51 @@ main {
   header{
     grid-template-columns: 1fr 2fr 1fr;
   }
+  #logo{
+    padding: 25px 50px;
+  }
   main{
     display: grid;
     grid-template-columns: 1fr 1fr 1r;
     grid-template-rows: repeat(4,1fr);
     width: 100vw;
   }
+  #player-user{
+    grid-column: 1 /span 5;
+  }
   #playerImage-container img{
     margin-left: 38px;
     width: 200px;    
   }
+  #playerUI-container {
+    width: 15rem;
+  }
+  #outer-container{
+    grid-column: 1;
+  }
   #computer-user{
-    grid-column: 2 /span 5;
+    grid-column: 1 /span 5;
+  }
+  #computerUI-container{
+    width: 15rem;
   }
   #computerImage-container img{
     width: 200px;
   }
   #move-1{
-    padding: 2em 5em;
+    padding: 1em 3em;
     margin-left: 5px;
   }
   #move-2{
-    padding: 2em 5em;
+    padding: 1em 3em;
     margin-right: 5px;
   }
   #move-3{
-    padding: 2em 5em;
+    padding: 1em 3em;
     margin-left: 5px;
   }
   #move-4{
-    padding: 2em 5em;
+    padding: 1em 3em;
     margin-right: 5px;
   }
 }
@@ -409,6 +431,52 @@ main {
   #playerImage-container img{
     margin-left: 10px;
     width: 150px;
+  }
+  #outer-container{
+    grid-column: 1;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  }
+  
+  .ball {
+    height: 50px;
+    width: 50px;  
+    border-radius: 50px;
+    display: flex;
+    border: 5px black solid;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#7D1827 5%, red 49%, black 5%, white 49%, #CADBD1)
+  }
+  
+  .center, .center2 {
+    background: white;
+    border: 3px black solid;
+  }
+  .center {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: grey;
+  }
+  .center2 {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    background-image: radial-gradient(white 60%, #757F7A)
+  }
+  
+  .ball:hover{
+    transition-duration: .2s;
+    transform: rotate(5deg);
+  /*   transform: rotate(0deg); */
   }
   #computer-user{
     grid-column: 1 /span 5;
@@ -466,7 +534,52 @@ main {
     width: 120px;
     height: 105px;
   }
-
+  #outer-container{
+    grid-column: 1;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  }
+  
+  .ball {
+    height: 50px;
+    width: 50px;  
+    border-radius: 50px;
+    display: flex;
+    border: 5px black solid;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#7D1827 5%, red 49%, black 5%, white 49%, #CADBD1)
+  }
+  
+  .center, .center2 {
+    background: white;
+    border: 3px black solid;
+  }
+  .center {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: grey;
+  }
+  .center2 {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    background-image: radial-gradient(white 60%, #757F7A)
+  }
+  
+  .ball:hover{
+    transition-duration: .2s;
+    transform: rotate(5deg);
+  /*   transform: rotate(0deg); */
+  }
   #computer-user{
     grid-column: 2 /span 5;
   }
@@ -500,24 +613,86 @@ main {
   body{
     position: absolute;
   }
+  #logo {
+    font-size: 10px;
+    padding: 12px 25px;
+  }
   #search-image img{
-    width: 18rem;
+    width: 15rem;
+  }
+  #player-search{
+    width: 6rem;
   }
   #playerUI-container{
     width: 9rem;
     height: 6rem;
   }
+  #playerUI-container p{
+    margin: 3px;
+  }
   #playerImage-container img{
-    width: 120px;
-    height: 105px;
+    width: 100px;
+    height: 85px;
+  }
+  #outer-container{
+    grid-column: 1;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  }
+  
+  .ball {
+    height: 50px;
+    width: 50px;  
+    border-radius: 50px;
+    display: flex;
+    border: 5px black solid;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#7D1827 5%, red 49%, black 5%, white 49%, #CADBD1)
+  }
+  
+  .center, .center2 {
+    background: white;
+    border: 3px black solid;
+  }
+  .center {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: grey;
+  }
+  .center2 {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    background-image: radial-gradient(white 60%, #757F7A)
+  }
+  
+  .ball:hover{
+    transition-duration: .2s;
+    transform: rotate(5deg);
+  /*   transform: rotate(0deg); */
+  }
+  #computer-user {
+    grid-column: 1 /span 5;
   }
   #computerUI-container{
     width: 9rem;
     height: 6rem;
   }
+  #computerUI-container p{
+    margin: 3px;
+  }
   #computerImage-container img{
-    width: 120px;
-    height: 105px;
+    width: 100px;
+    height: 85px;
   }
   #move-1{
     padding: 1rem .5rem;
@@ -532,7 +707,7 @@ main {
     margin-left: 5px;
   }
   #move-4{
-    padding: 1rem .5rem;
+    padding: 1rem .2rem;
     margin-right: 5px;
   }
 }

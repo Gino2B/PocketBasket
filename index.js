@@ -16,6 +16,9 @@ const userHPText = document.createElement('p');
 const actionPrompt = document.querySelector('#action-prompt');
 const moveLogs = document.querySelector('#moveused-text');
 const moveLogsText = document.createElement('p');
+const computerMoveLogsText = document.createElement('p');
+const twoSeconds = 2000;
+const fourSeconds = 4000;
 
 const baseDamageShoot = 3;
 const baseDamagePass = 2;
@@ -65,27 +68,30 @@ const seasonAverages = async (playerID, playerName) => {
     const computerHP = await document.querySelector('#computerHP');
     let computerHPvalue = computerHP.textContent;
 
+    const checkWinner = () => {
+      if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+        if(playerHP.innerText <= 0){
+          alert("Computer wins!");
+        }else{
+          alert("Player wins!");
+        }
+      }
+    }
+
     //what happens if user clicks on move 1 "shoot"
     move1.addEventListener('click', () => {
       //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
       if(threePointPerc >= .42) {
-        const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
+        const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
 
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-            gameOver = true;
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super effective!`;
         moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
+
         actionBox.style.visibility = "hidden";
         setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
         setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
@@ -97,13 +103,7 @@ const seasonAverages = async (playerID, playerName) => {
 
         
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
@@ -125,13 +125,7 @@ const seasonAverages = async (playerID, playerName) => {
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
 
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super effective!`;
@@ -146,13 +140,7 @@ const seasonAverages = async (playerID, playerName) => {
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
@@ -173,13 +161,7 @@ const seasonAverages = async (playerID, playerName) => {
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
 
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
@@ -194,13 +176,7 @@ const seasonAverages = async (playerID, playerName) => {
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
@@ -220,13 +196,7 @@ const seasonAverages = async (playerID, playerName) => {
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
         
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
@@ -241,13 +211,7 @@ const seasonAverages = async (playerID, playerName) => {
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
         //checks for winner 
-        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-          if(playerHP.innerText <= 0){
-            alert("Computer wins!");
-          }else{
-            alert("Player wins!");
-          }
-        }
+        checkWinner();
 
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
@@ -321,7 +285,7 @@ const searchPlayer = async (playerName) => {
 
 //repeat the same code above for the computer player. Make it so that after you click on any of the moves buttons it will then make the computer move like 1 second later
 
-const computerSeasonAverages = async (playerID) => {
+const computerSeasonAverages = async (playerID, playerName) => {
   try{  
     const response = await axios.get(`${API}/season_averages?season=2020&player_ids[]=${playerID}`);
     const responseData = response.data.data[0];
@@ -343,10 +307,14 @@ const computerSeasonAverages = async (playerID) => {
       if(num === 0) {
         if(threePointPerc >= .42) {
           //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
-          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
+          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Shoot");       
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super Effective!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd       
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -355,8 +323,12 @@ const computerSeasonAverages = async (playerID) => {
         }else {
           const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Shoot");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds); 
+          setTimeout(function(){moveLogs.innerHTML = '';},fourSeconds);
+          //checks if computer wins since it moves 2nd 
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -368,8 +340,12 @@ const computerSeasonAverages = async (playerID) => {
           //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
           const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Defend");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super Effective!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd 
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -378,8 +354,12 @@ const computerSeasonAverages = async (playerID) => {
         }else {
           const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Defend");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd 
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -391,8 +371,12 @@ const computerSeasonAverages = async (playerID) => {
           //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
           const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Pass");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd 
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -401,8 +385,12 @@ const computerSeasonAverages = async (playerID) => {
         }else{
           const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Pass");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd 
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -413,8 +401,12 @@ const computerSeasonAverages = async (playerID) => {
         if(rebounds >= 7){
           const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Box-out");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -423,8 +415,12 @@ const computerSeasonAverages = async (playerID) => {
         }else{
           const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
           playerHPvalue -= damage; //updates the user health
-          playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Box-out");
+          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+          //setting up move logs
+          computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
+          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+          //checks if computer wins since it moves 2nd          
           if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
             if(playerHP.innerText <= 0){
               alert("Computer wins!");
@@ -484,7 +480,7 @@ const computerPlayer = async (computerName) => {
     computerUIContainer.append(displayName,displayPosition);
     
     const playerID = responseData.id;
-    computerSeasonAverages(playerID);
+    computerSeasonAverages(playerID, fullName);
  
 
   } catch (error) {
