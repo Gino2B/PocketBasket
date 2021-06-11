@@ -70,10 +70,28 @@ const seasonAverages = async (playerID, playerName) => {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+            gameOver = true;
+          }else{
+            alert("Player wins!");
+          }
+        }
       }else {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }
       }
     });
 
@@ -87,10 +105,26 @@ const seasonAverages = async (playerID, playerName) => {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }
       }else {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
         computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use  
+        computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }  
       }
     });
 
@@ -103,10 +137,26 @@ const seasonAverages = async (playerID, playerName) => {
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }  
       }else{
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }  
       }
     });
 
@@ -118,10 +168,26 @@ const seasonAverages = async (playerID, playerName) => {
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }          
       }else{
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+        //checks for winner 
+        if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+          if(playerHP.innerText <= 0){
+            alert("Computer wins!");
+          }else{
+            alert("Player wins!");
+          }
+        }          
       }
     });
   }
@@ -211,38 +277,68 @@ const computerSeasonAverages = async (playerID) => {
           const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
-          console.log("Used Shoot");
+          console.log("Used Shoot");       
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }             
         }else {
           const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Shoot");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }
-      }else if(num === 2){
+      }else if(num === 1){
         if(steals >= 2 || blocks >= 2) {
           //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
           const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Defend");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }else {
           const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Defend");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }
-      }else if(num === 3){    //what happens if user clicks on move 3 "pass"
+      }else if(num === 2){    //what happens if user clicks on move 3 "pass"
         if(assists >= 7){
           //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
           const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Pass");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }else{
           const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Pass");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }        
       }else{    //what happens if user clicks on move 4 "box-out"
         if(rebounds >= 7){
@@ -250,11 +346,21 @@ const computerSeasonAverages = async (playerID) => {
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Box-out");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }else{
           const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
           playerHPvalue -= damage; //updates the user health
           playerHP.innerText = playerHPvalue;//sets the users health for screen use
           console.log("Used Box-out");
+          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+            if(playerHP.innerText <= 0){
+              alert("Computer wins!");
+            }
+          }          
         }        
       }
     };
