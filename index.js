@@ -14,6 +14,8 @@ const computerImageContainer = document.querySelector('#computerImage-container'
 const computerHPText = document.createElement('p');
 const userHPText = document.createElement('p');
 const actionPrompt = document.querySelector('#action-prompt');
+const moveLogs = document.querySelector('#moveused-text');
+const moveLogsText = document.createElement('p');
 
 const baseDamageShoot = 3;
 const baseDamagePass = 2;
@@ -70,7 +72,7 @@ const seasonAverages = async (playerID, playerName) => {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 1.5); //bonus damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        
+
         //checks for winner 
         if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
           if(playerHP.innerText <= 0){
@@ -80,10 +82,20 @@ const seasonAverages = async (playerID, playerName) => {
             alert("Player wins!");
           }
         }
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super effective!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+
       }else {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
         computerHPvalue -= damage; //updates the user health
         computerHP.innerText = computerHPvalue;//sets the users health for screen use
+
+        
         //checks for winner 
         if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
           if(playerHP.innerText <= 0){
@@ -92,6 +104,13 @@ const seasonAverages = async (playerID, playerName) => {
             alert("Player wins!");
           }
         }
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
       }
     });
 
@@ -113,6 +132,15 @@ const seasonAverages = async (playerID, playerName) => {
             alert("Player wins!");
           }
         }
+
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super effective!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+
       }else {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
         computerHPvalue -= damage; //updates the user health
@@ -124,7 +152,14 @@ const seasonAverages = async (playerID, playerName) => {
           }else{
             alert("Player wins!");
           }
-        }  
+        }
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);  
       }
     });
 
@@ -144,7 +179,16 @@ const seasonAverages = async (playerID, playerName) => {
           }else{
             alert("Player wins!");
           }
-        }  
+        }
+
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);  
+
       }else{
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
         computerHPvalue -= damage; //updates the user health
@@ -156,7 +200,14 @@ const seasonAverages = async (playerID, playerName) => {
           }else{
             alert("Player wins!");
           }
-        }  
+        }
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);  
       }
     });
 
@@ -175,7 +226,16 @@ const seasonAverages = async (playerID, playerName) => {
           }else{
             alert("Player wins!");
           }
-        }          
+        }
+        
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+        
       }else{
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
         computerHPvalue -= damage; //updates the user health
@@ -187,7 +247,16 @@ const seasonAverages = async (playerID, playerName) => {
           }else{
             alert("Player wins!");
           }
-        }          
+        }
+
+        //setting up the move log history
+        moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
+        moveLogs.appendChild(moveLogsText);   
+        const threeSeconds = 3000;
+        actionBox.style.visibility = "hidden";
+        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);   
+
       }
     });
   }
