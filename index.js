@@ -85,10 +85,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super effective!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
 
       }else {
         const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
@@ -107,10 +107,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
       }
     });
 
@@ -136,10 +136,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super effective!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
 
       }else {
         const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
@@ -156,10 +156,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);  
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);  
       }
     });
 
@@ -184,10 +184,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);  
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);  
 
       }else{
         const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
@@ -204,10 +204,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);  
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);  
       }
     });
 
@@ -231,10 +231,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
         
       }else{
         const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
@@ -252,10 +252,10 @@ const seasonAverages = async (playerID, playerName) => {
         //setting up the move log history
         moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
         moveLogs.appendChild(moveLogsText);   
-        const threeSeconds = 3000;
+        const twoSeconds = 2000;
         actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);   
+        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);   
 
       }
     });
