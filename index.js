@@ -17,8 +17,10 @@ const actionPrompt = document.querySelector('#action-prompt');
 const moveLogs = document.querySelector('#moveused-text');
 const moveLogsText = document.createElement('p');
 const computerMoveLogsText = document.createElement('p');
+const outerContainer = document.querySelector('#outer-container');
 const twoSeconds = 2000;
 const fourSeconds = 4000;
+let gameover = false;
 
 const baseDamageShoot = 3;
 const baseDamagePass = 2;
@@ -71,8 +73,12 @@ const seasonAverages = async (playerID, playerName) => {
     const checkWinner = () => {
       if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
         if(playerHP.innerText <= 0){
+          gameover = true;
+          setTimeout(function(){actionBox.style.visibility = "hidden";},fourSeconds);
           alert("Computer wins!");
         }else{
+          gameover = true;
+          setTimeout(function(){actionBox.style.visibility = "hidden";},fourSeconds);
           alert("Player wins!");
         }
       }
@@ -80,37 +86,43 @@ const seasonAverages = async (playerID, playerName) => {
 
     //what happens if user clicks on move 1 "shoot"
     move1.addEventListener('click', () => {
-      //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
-      if(threePointPerc >= .42) {
-        const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-
-        //checks for winner 
-        checkWinner();
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super effective!`;
-        moveLogs.appendChild(moveLogsText);   
-
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
-
-      }else {
-        const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-
-        
-        //checks for winner 
-        checkWinner();
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+      if(gameover === false){
+        //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
+        if(threePointPerc >= .40) {
+          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+  
+          //checks for winner 
+          checkWinner();
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super effective!`;
+          moveLogs.appendChild(moveLogsText);   
+  
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+  
+        }else {
+          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+  
+          
+          //checks for winner 
+          checkWinner();
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+        }
       }
     });
 
@@ -119,35 +131,41 @@ const seasonAverages = async (playerID, playerName) => {
     const steals = responseData.stl;
     const blocks = responseData.blk;
     move2.addEventListener('click', () => {
-      //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
-      if(steals >= 2 || blocks >= 2) {
-        const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        //checks for winner 
-        checkWinner();
-
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super effective!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
-
-      }else {
-        const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        //checks for winner 
-        checkWinner();
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);  
+      if(gameover === false){
+        //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
+        if(steals >= 2 || blocks >= 2) {
+          const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+          //checks for winner 
+          checkWinner();
+  
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super effective!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+  
+        }else {
+          const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+          //checks for winner 
+          checkWinner();
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+        }
       }
     });
 
@@ -155,35 +173,41 @@ const seasonAverages = async (playerID, playerName) => {
     const move3 = document.querySelector('#move-3');
     const assists = responseData.ast;
     move3.addEventListener('click', () => {
-      if(assists >= 7){
-        //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
-        const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        //checks for winner 
-        checkWinner();
-
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);  
-
-      }else{
-        const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        //checks for winner 
-        checkWinner();
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);  
+      if(gameover === false){
+        if(assists >= 7){
+          //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
+          const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+          //checks for winner 
+          checkWinner();
+  
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+  
+        }else{
+          const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+          //checks for winner 
+          checkWinner();
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+        }
       }
     });
 
@@ -191,36 +215,41 @@ const seasonAverages = async (playerID, playerName) => {
     const move4 = document.querySelector('#move-4');
     const rebounds = responseData.reb;
     move4.addEventListener('click', () => {
-      if(rebounds >= 7){
-        const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        //checks for winner 
-        checkWinner();
-        
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
-        
-      }else{
-        const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
-        computerHPvalue -= damage; //updates the user health
-        computerHP.innerText = computerHPvalue;//sets the users health for screen use
-        //checks for winner 
-        checkWinner();
-
-        //setting up the move log history
-        moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
-        moveLogs.appendChild(moveLogsText);   
-        const twoSeconds = 2000;
-        actionBox.style.visibility = "hidden";
-        setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
-        setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);   
-
+      if(gameover === false){
+        if(rebounds >= 7){
+          const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+          //checks for winner 
+          checkWinner();
+          
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          }
+          
+        }else{
+          const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
+          computerHPvalue -= damage; //updates the user health
+          computerHP.innerText = computerHPvalue;//sets the users health for screen use
+          //checks for winner 
+          checkWinner();
+  
+          //setting up the move log history
+          moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
+          moveLogs.appendChild(moveLogsText);   
+          const twoSeconds = 2000;
+          actionBox.style.visibility = "hidden";
+          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          if(gameover === false){
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+          } 
+        }
       }
     });
   }
@@ -257,6 +286,7 @@ const searchPlayer = async (playerName) => {
       actionBox.style.visibility = "visible";
       playerUI.style.visibility = "visible";
       computerUI.style.visibility = "visible";
+      outerContainer.style.visibility = "visible";
     });
 
     //get data for the player UI box
@@ -304,129 +334,163 @@ const computerSeasonAverages = async (playerID, playerName) => {
     const rebounds = responseData.reb;
 
     const useMove = (num) => {
-      if(num === 0) {
-        if(threePointPerc >= .42) {
-          //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
-          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super Effective!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd       
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }             
-        }else {
-          const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds); 
-          setTimeout(function(){moveLogs.innerHTML = '';},fourSeconds);
-          //checks if computer wins since it moves 2nd 
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
+      if(gameover === false){
+        if(num === 0) {
+          if(threePointPerc >= .40) {
+            //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
+            const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super Effective!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd   
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);    
+          }else {
+            const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds); 
+            setTimeout(function(){moveLogs.innerHTML = '';},fourSeconds);
+            //checks if computer wins since it moves 2nd 
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);          
+          }
+        }else if(num === 1){
+          if(steals >= 2 || blocks >= 2) {
+            //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
+            const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super Effective!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd 
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);          
+          }else {
+            const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd 
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);            
+          }
+        }else if(num === 2){    //what happens if user clicks on move 3 "pass"
+          if(assists >= 7){
+            //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
+            const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd 
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);            
+          }else{
+            const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd 
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);          
+          }        
+        }else{    //what happens if user clicks on move 4 "box-out"
+          if(rebounds >= 7){
+            const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);           
+          }else{
+            const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
+            playerHPvalue -= damage; //updates the user health
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            //setting up move logs
+            computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            //checks if computer wins since it moves 2nd          
+            setTimeout(() => {
+              if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
+                if(playerHP.innerText <= 0){
+                  gameover = true;
+                  actionBox.style.visibility ="hidden";
+                  alert("Computer wins!");
+                }
+              }                
+            }, twoSeconds);             
+          }        
         }
-      }else if(num === 1){
-        if(steals >= 2 || blocks >= 2) {
-          //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
-          const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super Effective!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd 
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
-        }else {
-          const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd 
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
-        }
-      }else if(num === 2){    //what happens if user clicks on move 3 "pass"
-        if(assists >= 7){
-          //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
-          const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd 
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
-        }else{
-          const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd 
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
-        }        
-      }else{    //what happens if user clicks on move 4 "box-out"
-        if(rebounds >= 7){
-          const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
-        }else{
-          const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
-          playerHPvalue -= damage; //updates the user health
-          setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
-          //setting up move logs
-          computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
-          setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-          setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
-          //checks if computer wins since it moves 2nd          
-          if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
-            if(playerHP.innerText <= 0){
-              alert("Computer wins!");
-            }
-          }          
-        }        
       }
     };
     
