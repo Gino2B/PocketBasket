@@ -492,8 +492,7 @@ const computerSeasonAverages = async (playerID, playerName) => {
           }        
         }
       }
-    };
-    
+    };  
     move1.addEventListener('click', () => {
       useMove(Math.floor(Math.random() * 4));
     } ); 
