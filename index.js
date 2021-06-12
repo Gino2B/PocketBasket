@@ -18,9 +18,13 @@ const moveLogs = document.querySelector('#moveused-text');
 const moveLogsText = document.createElement('p');
 const computerMoveLogsText = document.createElement('p');
 const outerContainer = document.querySelector('#outer-container');
-const twoSeconds = 2000;
-const fourSeconds = 4000;
+const threeSeconds = 3000;
+const sixSeconds = 6000;
 let gameover = false;
+const replayButton = document.createElement('button');
+replayButton.innerText = 'Play Again?';
+const beginning = document.createElement('a');
+beginning.href = "#beginning";
 
 const baseDamageShoot = 3;
 const baseDamagePass = 2;
@@ -56,6 +60,15 @@ const clearUI = () =>  {
   computerUI.style.visibility = "hidden";
 }; 
 
+const playAgain = () => {
+  beginning.appendChild(replayButton);
+  moveLogs.appendChild(beginning);
+  replayButton.addEventListener('click', () => {
+    window.location.hash = "#beginning";
+    window.location.reload();
+  });
+};
+
 //Uses playerID to get season averages and data
 const seasonAverages = async (playerID, playerName) => {
   try{  
@@ -74,12 +87,14 @@ const seasonAverages = async (playerID, playerName) => {
       if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
         if(playerHP.innerText <= 0){
           gameover = true;
-          setTimeout(function(){actionBox.style.visibility = "hidden";},fourSeconds);
+          setTimeout(function(){actionBox.style.visibility = "hidden";},sixSeconds);
           alert("Computer wins!");
+          setTimeout(playAgain,sixSeconds);
         }else{
           gameover = true;
-          setTimeout(function(){actionBox.style.visibility = "hidden";},fourSeconds);
+          setTimeout(function(){actionBox.style.visibility = "hidden";},sixSeconds);
           alert("Player wins!");
+          setTimeout(playAgain,sixSeconds);
         }
       }
     }
@@ -100,9 +115,9 @@ const seasonAverages = async (playerID, playerName) => {
           moveLogs.appendChild(moveLogsText);   
   
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
   
         }else {
@@ -116,11 +131,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
         }
       }
@@ -143,11 +157,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super effective!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
   
         }else {
@@ -159,11 +172,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
         }
       }
@@ -185,11 +197,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
   
         }else{
@@ -201,11 +212,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
         }
       }
@@ -226,11 +236,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           }
           
         }else{
@@ -243,11 +252,10 @@ const seasonAverages = async (playerID, playerName) => {
           //setting up the move log history
           moveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
           moveLogs.appendChild(moveLogsText);   
-          const twoSeconds = 2000;
           actionBox.style.visibility = "hidden";
-          setTimeout(function(){ moveLogs.innerHTML = '';},twoSeconds);
+          setTimeout(function(){ moveLogs.innerHTML = '';},threeSeconds);
           if(gameover === false){
-            setTimeout(function(){ actionBox.style.visibility = "visible"; }, twoSeconds);
+            setTimeout(function(){ actionBox.style.visibility = "visible"; }, threeSeconds);
           } 
         }
       }
@@ -333,6 +341,12 @@ const computerSeasonAverages = async (playerID, playerName) => {
     const move4 = document.querySelector('#move-4');
     const rebounds = responseData.reb;
 
+    const playAgain = () => {
+      beginning.appendChild(replayButton);
+      moveLogs.appendChild(beginning);
+      replayButton.addEventListener('click', () => window.location.reload());
+    };
+
     const useMove = (num) => {
       if(gameover === false){
         if(num === 0) {
@@ -340,11 +354,11 @@ const computerSeasonAverages = async (playerID, playerName) => {
             //checks if players 3pt% is above or equal to 42% (a good 3pt shooter) to see if the move should do more damage
             const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade))) * 2); //bonus damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage! Super Effective!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd   
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -352,17 +366,18 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);    
+            }, threeSeconds);    
           }else {
             const damage = Math.floor((baseDamageShoot + Math.floor((threePointPerc*threePointMade)))); //standard damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Shoot! It did ${damage} damage!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds); 
-            setTimeout(function(){moveLogs.innerHTML = '';},fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds); 
+            setTimeout(function(){moveLogs.innerHTML = '';},sixSeconds);
             //checks if computer wins since it moves 2nd 
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -370,20 +385,21 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);          
+            }, threeSeconds);          
           }
         }else if(num === 1){
           if(steals >= 2 || blocks >= 2) {
             //checks if the players steals or blocks is above or equal to 2 (a great defensive player) to see if the move should do more damage
             const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks)) * 1.5); //bonus damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage! Super Effective!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd 
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -391,17 +407,18 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);          
+            }, threeSeconds);          
           }else {
             const damage = Math.floor((baseDamageSteal) + Math.floor((steals+blocks))); //standard damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Defend! It did ${damage} damage!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd 
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -409,20 +426,21 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);            
+            }, threeSeconds);            
           }
         }else if(num === 2){    //what happens if user clicks on move 3 "pass"
           if(assists >= 7){
             //checks if players assists is above or equal to 7 (a good passer) to see if the move should do more damage
             const damage = Math.floor((baseDamagePass + Math.floor((assists/2))) * 1.5); //bonus damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage! Super effective!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd 
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -430,17 +448,18 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);            
+            }, threeSeconds);            
           }else{
             const damage = Math.floor((baseDamagePass + Math.floor((assists/2)))); //standard damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Pass! It did ${damage} damage!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd 
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -448,19 +467,20 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);          
+            }, threeSeconds);          
           }        
         }else{    //what happens if user clicks on move 4 "box-out"
           if(rebounds >= 7){
             const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2))) * 1.5); //bonus damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage! Super effective!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -468,17 +488,18 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);           
+            }, threeSeconds);           
           }else{
             const damage = Math.floor((baseDamageRebound + Math.floor((rebounds/2)))); //standard damage
             playerHPvalue -= damage; //updates the user health
-            setTimeout(function(){playerHP.innerText = playerHPvalue;},twoSeconds);//sets the users health for screen use
+            setTimeout(function(){playerHP.innerText = playerHPvalue;},threeSeconds);//sets the users health for screen use
             //setting up move logs
             computerMoveLogsText.innerText = `${playerName} used Box-out! It did ${damage} damage!`;
-            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},twoSeconds);
-            setTimeout(function(){moveLogs.innerHTML = '';}, fourSeconds);
+            setTimeout(function(){moveLogs.appendChild(computerMoveLogsText);},threeSeconds);
+            setTimeout(function(){moveLogs.innerHTML = '';}, sixSeconds);
             //checks if computer wins since it moves 2nd          
             setTimeout(() => {
               if(playerHP.innerText <= 0 || computerHP.innerText <= 0){
@@ -486,9 +507,10 @@ const computerSeasonAverages = async (playerID, playerName) => {
                   gameover = true;
                   actionBox.style.visibility ="hidden";
                   alert("Computer wins!");
+                  setTimeout(playAgain,sixSeconds);
                 }
               }                
-            }, twoSeconds);             
+            }, threeSeconds);             
           }        
         }
       }
@@ -561,4 +583,5 @@ playerForm.addEventListener('submit', async (e) => {
   await searchPlayer(playerSearch.value);
   await computerPlayer(playerNames[Math.floor(Math.random()*playerNames.length)]);
   playerSearch.value='';   
+  gameover = false;
 });
