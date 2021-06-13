@@ -65,7 +65,7 @@ const playAgain = () => {
   moveLogs.appendChild(beginning);
   replayButton.addEventListener('click', () => {
     window.location.hash = "#beginning";
-    window.location.reload();
+    setTimeout(window.location.reload(), 1000);
   });
 };
 
@@ -344,7 +344,10 @@ const computerSeasonAverages = async (playerID, playerName) => {
     const playAgain = () => {
       beginning.appendChild(replayButton);
       moveLogs.appendChild(beginning);
-      replayButton.addEventListener('click', () => window.location.reload());
+      replayButton.addEventListener('click', () => {
+        window.location.hash = "#beginning";
+        setTimeout(window.location.reload(), 1000);
+      });
     };
 
     const useMove = (num) => {
