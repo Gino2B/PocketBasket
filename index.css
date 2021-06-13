@@ -415,7 +415,7 @@ main {
     grid-template-columns: 1fr 1fr 1r;
     grid-template-rows: repeat(4,1fr);
     width: 100vw;
-    background-size: 100vw 45vh;
+    background-size: 100vw 55vh;
   }
   #player-user{
     grid-column: 1 /span 3;
