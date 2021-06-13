@@ -11,7 +11,8 @@ header{
   grid-template-rows: repeat(5,1fr);
   width: 100vw;
   height: 95vh;
-  background-color: lightcyan;
+  background-image: url('https://wallpaperaccess.com/full/139512.jpg');
+  background-size: 100vw 95vh;
 }
 #picture-logo{
   grid-column: 2;
@@ -26,6 +27,9 @@ header{
   grid-row: 2;
   text-align: center;
 }
+#search-prompt h3{
+  color: white;
+}
 #search-image{
   grid-column: 2;
   grid-row: 3;
@@ -35,6 +39,7 @@ header{
   margin: 1vh auto;
 }
 #search-image p {
+  color: white;
   text-align: center;
 }
 #search-bar{
@@ -58,6 +63,9 @@ main {
   grid-template-rows: repeat(4,1fr);
   width: 100vw;
   height: 85vh;
+  background-image: url('https://cdn.wallpapersafari.com/85/89/6lOBvr.png');
+  background-size: 100vw 60vh;
+  background-repeat: no-repeat;
 }
 
 #player-user {
@@ -75,6 +83,7 @@ main {
   width: 20rem;
   height: 9rem;
   border: 2px solid grey;
+  background-color: white;
 }
 #playerUI-container p {
   margin: 1rem 1rem;
@@ -87,11 +96,6 @@ main {
   display: inline-block;
   margin: 0;
 }
-#playerImage-container img{
-  border: 2px solid black;
-  border-radius: 100%;
-}
-
 #outer-container {
   grid-column: 2;
   grid-row: 2;
@@ -153,6 +157,7 @@ main {
   text-align: center;
   margin: auto;
   margin-left: 0;
+  color: white;
 }
 
 #computerHP-text{
@@ -176,24 +181,22 @@ main {
   width: 20rem;
   height: 9rem;
   border: 2px solid grey;
+  background-color: white;
 }
 #computerUI-container p {
   margin: 1rem 1rem;
   font-size: 20px;
 }
-#computerImage-container img{
-  border: 2px solid black;
-  border-radius: 100%;
-}
 #action-box{
-  margin: 10px;
+  margin: 10px 0;
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-template-rows: 1fr 3fr 3fr;
-  grid-column: 2 / 5;
+  grid-column: 1 /span 5;
   grid-row: 4;
   visibility: hidden;
   height: 40vh;
+  width: 99vw;
   text-align: center;
   border: 3px solid black;
   background: linear-gradient(to bottom, #e0eafc, #cfdef3);
@@ -300,19 +303,19 @@ main {
     font-size: 22px;
   }
   #move-1{
-    padding: 2em 12em;
+    padding: 4em 15em;
     font-size: 22px;
   }
   #move-2{
-    padding: 2em 12em;
+    padding: 4em 15em;
     font-size: 22px;
   }
   #move-3{
-    padding: 2em 12em;
+    padding: 4em 15em;
     font-size: 22px;
   }
   #move-4{
-    padding: 2em 12em;
+    padding: 4em 15em;
     font-size: 22px;
   }
 }
@@ -353,13 +356,18 @@ main {
     grid-template-columns: 1fr 1fr 1r;
     grid-template-rows: repeat(4,1fr);
     width: 100vw;
+    background-size: 100vw 45vh;
   }
   #playerImage-container img{
     margin-left: 38px;
-    width: 200px;    
+    width: 220px;  
+    height: 220px;  
   }
   #outer-container{
     grid-column: 1;
+  }
+  #moveused-text{
+    grid-column: 2/span 5;
   }
   #moveused-text p{
     font-size: 24px;
@@ -368,7 +376,8 @@ main {
     margin-right: 38px;
   }
   #computerImage-container img{
-    width: 200px;
+    height: 220px;
+    width: 220px;
   }
   #action-text{
     font-size: 20px;
@@ -406,9 +415,10 @@ main {
     grid-template-columns: 1fr 1fr 1r;
     grid-template-rows: repeat(4,1fr);
     width: 100vw;
+    background-size: 100vw 45vh;
   }
   #player-user{
-    grid-column: 1 /span 5;
+    grid-column: 1 /span 3;
   }
   #playerImage-container img{
     margin-left: 38px;
@@ -418,7 +428,7 @@ main {
     width: 15rem;
   }
   #outer-container{
-    grid-column: 1;
+    grid-column: 2;
   }
   .container {
     display: flex;
@@ -464,7 +474,7 @@ main {
   /*   transform: rotate(0deg); */
   }
   #computer-user{
-    grid-column: 1 /span 5;
+    grid-column: 2 /span 4;
   }
   #computerUI-container{
     width: 15rem;
@@ -472,20 +482,23 @@ main {
   #computerImage-container img{
     width: 200px;
   }
+  #action-box{
+    width: 98vw;
+  }
   #move-1{
-    padding: 1em 3em;
+    padding: 2em 5em;
     margin-left: 5px;
   }
   #move-2{
-    padding: 1em 3em;
+    padding: 2em 5em;
     margin-right: 5px;
   }
   #move-3{
-    padding: 1em 3em;
+    padding: 2em 5em;
     margin-left: 5px;
   }
   #move-4{
-    padding: 1em 3em;
+    padding: 2em 5em;
     margin-right: 5px;
   }
 }
@@ -500,7 +513,9 @@ main {
   header{
     grid-template-columns: 1fr 2fr 1fr;
   }
-
+  #search-image {
+    text-align: center;
+  }
   #search-image img{
     width: 200px;
   }
@@ -510,6 +525,7 @@ main {
   main{
     grid-template-columns: 1fr 1fr 1r;
     grid-template-rows: repeat(4,1fr);
+    background-size: 100vw 45vh;
   }
   #playerUI-container{
     margin: auto;
@@ -526,7 +542,7 @@ main {
     width: 150px;
   }
   #outer-container{
-    grid-column: 1;
+    grid-column: 2;
   }
   .container {
     display: flex;
@@ -587,6 +603,9 @@ main {
   #computerImage-container img{
     width: 150px;
   }
+  #action-box {
+    height: 40vh;
+  }
   #move-1{
     padding: 1em 2em;
   }
@@ -608,11 +627,17 @@ main {
   #picture-logo{
     width:60vw;
   }
+  #search-image {
+    text-align: center;
+  }
   #search-image img{
     width: 200px;
   }
   #player-search {
     width: 8rem;
+  }
+  main {
+    background-size: 100vw 50vh;
   }
   #playerUI-container{
     width: 9rem;
@@ -627,7 +652,7 @@ main {
     height: 105px;
   }
   #outer-container{
-    grid-column: 1;
+    grid-column: 2;
   }
   .container {
     display: flex;
@@ -687,6 +712,9 @@ main {
     width: 120px;
     height: 105px;
   }
+  #action-box{
+    height: 35vh;
+  }
   #move-1{
     padding: 1rem 1rem;
   }
@@ -709,10 +737,13 @@ main {
     width:60vw;
   }
   #search-image img{
-    width: 15rem;
+    width: 12rem;
   }
   #player-search{
     width: 6rem;
+  }
+  main{
+    background-size: 100vw 50vh;
   }
   #playerUI-container{
     width: 9rem;
@@ -723,7 +754,7 @@ main {
   }
   #playerImage-container img{
     width: 100px;
-    height: 85px;
+    height: 100px;
   }
   #outer-container{
     grid-column: 1;
@@ -771,6 +802,9 @@ main {
     transform: rotate(5deg);
   /*   transform: rotate(0deg); */
   }
+  #moveused-text{
+    grid-column: 2/5;
+  }
   #computer-user {
     grid-column: 1 /span 5;
   }
@@ -783,7 +817,10 @@ main {
   }
   #computerImage-container img{
     width: 100px;
-    height: 85px;
+    height: 100px;
+  }
+  #action-box{
+    height: 35vh;
   }
   #move-1{
     padding: 1rem .5rem;
